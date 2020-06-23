@@ -252,20 +252,20 @@ const nameValidator = () =>{
 	}
 }
 
-// Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example.
+
 const mailValidator = () => {
 	let mailValue = mail.value;
-	let indexofAt = mailValue.indexOf('@');
-	let indexofDot = mailValue.indexOf('.');
 
-	if (indexofAt > 1 && indexofDot > indexofAt + 1 ){
-		mail.style.border = "solid white";
-		return true;
-	}else{
-		mail.style.border = "solid red";
-		return false;
+	const isValid = (email) => {
+	  return /[^@]+@[^@.]+\.[a-z]+/.test(email);
 	}
-
+	
+		if(isValid(mailValue)) {
+			mail.style.border = "solid white";
+			return true;			
+		}
+	
+	mail.style.border = 'solid red';
 }
 
 document.addEventListener('input', function (event) {
@@ -301,7 +301,7 @@ const creditcardValidator = () => {
 
 	// Credit Card field should only accept a number between 13 and 16 digits.
 	const isValid = (creditcardnumber) => {
-	  return /^(?=(?:.{13}|.{16})$)[0-9]*$/.test(creditcardnumber);
+	  return /^(?=(?:.{13,16})$)[0-9]*$/.test(creditcardnumber);
 	}
 	if(paymentSelection[1].selected){
 		if(cardNumber.value && isValid(cardNumber.value)) {
